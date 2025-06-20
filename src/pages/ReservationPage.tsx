@@ -1,58 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Check, Download } from 'lucide-react';
-
-// Sample property data
-const properties = [
-  {
-    id: '1',
-    title: 'Parcela Vista Montaña',
-    location: 'Santa Bárbara, Bío Bío',
-    price: '35.000.000',
-    area: '5.000',
-    image: 'https://images.pexels.com/photos/147411/italy-mountains-dawn-daybreak-147411.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  },
-  {
-    id: '2',
-    title: 'Parcela Río Claro',
-    location: 'Los Ángeles, Bío Bío',
-    price: '42.000.000',
-    area: '5.000',
-    image: 'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  },
-  {
-    id: '3',
-    title: 'Parcela Bosque Nativo',
-    location: 'Alto Bío Bío, Bío Bío',
-    price: '38.500.000',
-    area: '5.000',
-    image: 'https://images.pexels.com/photos/572780/pexels-photo-572780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  },
-  {
-    id: '4',
-    title: 'Parcela Valle Verde',
-    location: 'Mulchén, Bío Bío',
-    price: '36.500.000',
-    area: '5.000',
-    image: 'https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  },
-  {
-    id: '5',
-    title: 'Parcela Mirador',
-    location: 'Nacimiento, Bío Bío',
-    price: '39.900.000',
-    area: '5.000',
-    image: 'https://images.pexels.com/photos/1563604/pexels-photo-1563604.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  },
-  {
-    id: '6',
-    title: 'Parcela Los Robles',
-    location: 'Yumbel, Bío Bío',
-    price: '32.000.000',
-    area: '5.000',
-    image: 'https://images.pexels.com/photos/2437295/pexels-photo-2437295.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  },
-];
+import { properties } from '../lib/consts';
 
 interface FormData {
   firstName: string;
@@ -95,7 +44,7 @@ const ReservationPage = () => {
           <p className="text-gray-600 mb-6">El terreno que estás buscando no existe o ha sido removido.</p>
           <button
             onClick={() => navigate(-1)}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-medium transition-colors inline-flex items-center"
+            className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-all transform hover:scale-105 shadow-elegant inline-flex items-center"
           >
             <ArrowLeft size={20} className="mr-2" />
             Volver
@@ -211,14 +160,14 @@ const ReservationPage = () => {
             {/* Property Summary */}
             <div className="p-6 border-b border-gray-200 flex items-center">
               <img
-                src={property.image}
+                src={property.images[0]}
                 alt={property.title}
                 className="w-20 h-20 object-cover rounded-md mr-4"
               />
               <div>
                 <h2 className="font-semibold text-gray-800">{property.title}</h2>
                 <p className="text-gray-600 text-sm">{property.location}</p>
-                <p className="text-emerald-600 font-medium">$ {property.price}</p>
+                <p className="text-primary-600 font-medium">$ {property.price}</p>
               </div>
             </div>
 
@@ -323,7 +272,7 @@ const ReservationPage = () => {
                         name="address"
                         value={formData.address}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"
+                        className="w-full pl-4 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all"
                       />
                     </div>
                     <div>
@@ -336,7 +285,7 @@ const ReservationPage = () => {
                         name="city"
                         value={formData.city}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"
+                        className="w-full pl-4 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all"
                       />
                     </div>
                     <div className="md:col-span-2">
@@ -349,7 +298,7 @@ const ReservationPage = () => {
                         value={formData.comments}
                         onChange={handleChange}
                         rows={4}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"
+                        className="w-full pl-4 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all"
                       ></textarea>
                     </div>
                   </div>
@@ -361,7 +310,7 @@ const ReservationPage = () => {
                   <h2 className="text-xl font-semibold text-gray-800 mb-6">Confirmar Reserva</h2>
 
                   {/* Reservation Summary */}
-                  <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                  <div className="bg-primary-50 p-6 rounded-lg mb-6 shadow-card">
                     <h3 className="font-medium text-gray-800 mb-3">Resumen de la reserva</h3>
                     <div className="grid grid-cols-2 gap-y-2 text-sm">
                       <div className="text-gray-600">Nombre completo:</div>
@@ -429,8 +378,8 @@ const ReservationPage = () => {
                       </button>
                     </div>
                     <div className="bg-white border border-gray-200 rounded p-3 h-32 overflow-y-auto text-sm text-gray-600">
-                      <p className="font-medium text-center mb-2">CARTA DE RESERVA</p>
-                      <p>Por medio de la presente, {formData.firstName} {formData.lastName}, RUT {formData.rut}, manifiesta su intención de reservar la parcela "{property.title}", ubicada en {property.location}, con una superficie de {property.area} m², por un valor de ${property.price} pesos chilenos.</p>
+                      <p className="font-medium text-center mb-2">CARTA DE RESERVA - ALTOS DE MAHUIDA</p>
+                      <p>Por medio de la presente, {formData.firstName} {formData.lastName}, RUT {formData.rut}, manifiesta su intención de reservar la parcela "{property.title}", ubicada en el proyecto Altos de Mahuida, {property.location}, con una superficie de {property.area} m², por un valor de ${property.price} pesos chilenos.</p>
                     </div>
                   </div>
                 </div>
@@ -460,13 +409,13 @@ const ReservationPage = () => {
                 <Check size={32} className="text-emerald-600" />
               </div>
               <h1 className="text-2xl font-bold">¡Reserva Completada!</h1>
-              <p className="text-emerald-100">Tu reserva ha sido procesada correctamente</p>
+              <p className="text-emerald-100">Tu reserva en Altos de Mahuida ha sido procesada correctamente</p>
             </div>
             <div className="p-8 text-center">
               <p className="text-gray-600 mb-6">
-                Hemos recibido tu solicitud de reserva para la parcela "{property.title}".
-                En los próximos días, un agente inmobiliario se pondrá en contacto contigo para
-                coordinar los siguientes pasos.
+                Hemos recibido tu solicitud de reserva para la parcela "{property.title}" en el proyecto Altos de Mahuida.
+                En las próximas 24 horas, nuestro equipo de ventas se pondrá en contacto contigo para
+                coordinar una visita al terreno y los siguientes pasos.
               </p>
               <p className="text-gray-600 mb-8">
                 Se ha enviado una copia de la carta de reserva a tu correo electrónico: <span className="font-semibold">{formData.email}</span>
@@ -480,7 +429,7 @@ const ReservationPage = () => {
                 </button>
                 <button
                   onClick={() => navigate('/contact')}
-                  className="bg-white border border-emerald-600 text-emerald-600 hover:bg-emerald-50 px-6 py-3 rounded-lg font-medium transition-colors"
+                  className="w-full bg-white border border-primary-600 text-primary-600 hover:bg-primary-50 px-6 py-3 rounded-lg font-medium transition-all transform hover:scale-105 shadow-elegant flex items-center justify-center"
                 >
                   Contactar Agente
                 </button>
