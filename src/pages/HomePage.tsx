@@ -13,6 +13,7 @@ import {
     Trees,
     Home,
     Coins,
+    Play,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import PropertyCard from "../components/PropertyCard";
@@ -21,6 +22,7 @@ import MapComponent from "../components/MapComponent";
 
 import BentoCard from "../components/BentoCard";
 import BentoDialog from "../components/BentoDialog";
+import VideoDialog from "../components/VideoDialog";
 import { territoryImages, featureImages, exclusiveImages } from "../lib/images";
 import FeatureHighlight from "../components/FeatureHighlight";
 import FeatureCard from "../components/FeatureCard";
@@ -46,6 +48,7 @@ const HomePage = () => {
     const [selectedItem, setSelectedItem] = useState<BentoCardProps | null>(
         null
     );
+    const [isVideoOpen, setIsVideoOpen] = useState(false);
 
     const testimonials: TestimonialData[] = [
         {
@@ -126,35 +129,53 @@ const HomePage = () => {
                         lugar perfecto para descansar, disfrutar de la nieve y
                         la tranquilidad.
                     </motion.p>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 1, duration: 0.8 }}
-                        className="flex flex-col sm:flex-row gap-4 justify-center"
-                    >
+
+                    <div className="flex flex-col items-center justify-center gap-8">
                         <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1, duration: 0.8 }}
+                            className="flex flex-col items-center sm:flex-row gap-4 justify-center"
+                        >
+                            <motion.div
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                <div className="flex items-center gap-4">
+                                    <Link
+                                        to="/listings"
+                                        className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-lg font-medium transition-all transform hover:scale-105 shadow-elegant"
+                                    >
+                                        Ver Terrenos
+                                    </Link>
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                <Link
+                                    to="/contact"
+                                    className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/30 px-8 py-3 rounded-lg font-medium transition-colors"
+                                >
+                                    Contactar Agente
+                                </Link>
+                            </motion.div>
+                        </motion.div>
+
+                        <motion.button
+                            onClick={() => setIsVideoOpen(true)}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
+                            className="flex items-center gap-2 text-white hover:text-emerald-500 transition-colors"
                         >
-                            <Link
-                                to="/listings"
-                                className="bg-emerald-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-all transform hover:scale-105 shadow-elegant"
-                            >
-                                Ver Terrenos
-                            </Link>
-                        </motion.div>
-                        <motion.div
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <Link
-                                to="/contact"
-                                className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/30 px-8 py-3 rounded-lg font-medium transition-colors"
-                            >
-                                Contactar Agente
-                            </Link>
-                        </motion.div>
-                    </motion.div>
+                            <div className="aspect-square relative bg-white/20 backdrop-blur-sm rounded-full size-14">
+                                <Play className="w-8 h-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ml-0.5" />
+                            </div>
+                            <span className="font-bold">Ver Video</span>
+                        </motion.button>
+                    </div>
                 </motion.div>
             </section>
 
@@ -232,6 +253,11 @@ const HomePage = () => {
                         ))}
                     </div>
                 </div>
+                <VideoDialog
+                    videoId="Mx2JuBHKJec"
+                    isOpen={isVideoOpen}
+                    onClose={() => setIsVideoOpen(false)}
+                />
             </section>
 
             {/* Featured Properties */}
