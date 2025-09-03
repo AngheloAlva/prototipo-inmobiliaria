@@ -14,6 +14,8 @@ import {
     Home,
     Coins,
     Play,
+    Map,
+    X,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import PropertyCard from "../components/PropertyCard";
@@ -49,6 +51,7 @@ const HomePage = () => {
     );
     const [isVideoOpen, setIsVideoOpen] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [isMapOpen, setIsMapOpen] = useState(false);
 
     const testimonials: TestimonialData[] = [
         {
@@ -220,6 +223,20 @@ const HomePage = () => {
                         </motion.button>
                     </div>
                 </motion.div>
+
+                {/* Map Button */}
+                <motion.button
+                    onClick={() => setIsMapOpen(true)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.2, duration: 0.8 }}
+                    className="absolute bottom-8 left-8 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/30 px-4 py-3 rounded-lg font-medium transition-colors flex items-center gap-2"
+                >
+                    <Map className="w-5 h-5" />
+                    <span>Mapa de Loteo</span>
+                </motion.button>
             </section>
 
             {/* Benefits Section */}
@@ -297,10 +314,55 @@ const HomePage = () => {
                     </div>
                 </div>
                 <VideoDialog
-                    videoId="BVE_eSFg3-c"
+                    videoId="Mx2JuBHKJec"
                     isOpen={isVideoOpen}
                     onClose={() => setIsVideoOpen(false)}
                 />
+
+                {/* Map Dialog */}
+                {isMapOpen && (
+                    <div
+                        className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+                        onClick={() => setIsMapOpen(false)}
+                    >
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            className="bg-white rounded-xl overflow-hidden max-w-4xl w-full max-h-[90vh] relative"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Header */}
+                            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+                                <h3 className="text-xl font-semibold text-gray-800">
+                                    Mapa de Lotes Disponibles
+                                </h3>
+                                <button
+                                    onClick={() => setIsMapOpen(false)}
+                                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                                >
+                                    <X className="w-6 h-6" />
+                                </button>
+                            </div>
+
+                            {/* Map Image */}
+                            <div className="">
+                                <img
+                                    src="/places.jpeg"
+                                    alt="Mapa de terrenos disponibles en Altos de Mahuida"
+                                    className="w-full h-auto rounded-lg"
+                                />
+                            </div>
+
+                            {/* Footer */}
+                            <div className="p-4 border-t border-gray-200 text-center">
+                                <p className="text-gray-600 text-sm">
+                                    Explora nuestros lotes disponibles
+                                </p>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
             </section>
 
             {/* Featured Properties */}
