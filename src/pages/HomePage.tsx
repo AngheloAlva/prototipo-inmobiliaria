@@ -297,7 +297,7 @@ const HomePage = () => {
                     </div>
                 </div>
                 <VideoDialog
-                    videoId="Mx2JuBHKJec"
+                    videoId="BVE_eSFg3-c"
                     isOpen={isVideoOpen}
                     onClose={() => setIsVideoOpen(false)}
                 />
