@@ -56,7 +56,7 @@ const Navbar = () => {
                                         : "text-white"
                                 }`}
                             >
-                                Canela Invert Asesorías
+                                Inmobiliaria Ulloa Accardi
                             </span>
                         </Link>
                     </motion.div>
@@ -75,7 +75,17 @@ const Navbar = () => {
                             >
                                 <Link
                                     to={url}
-                                    className={`font-medium transition-colors relative ${location.pathname === url ? 'text-emerald-600' : isScrolled ? 'text-gray-800 hover:text-emerald-600' : 'text-white hover:text-emerald-200'} ${location.pathname === url ? 'after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-emerald-600' : ''}`}
+                                    className={`font-medium transition-colors relative ${
+                                        location.pathname === url
+                                            ? "text-emerald-600"
+                                            : isScrolled
+                                            ? "text-gray-800 hover:text-emerald-600"
+                                            : "text-white hover:text-emerald-200"
+                                    } ${
+                                        location.pathname === url
+                                            ? "after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-emerald-600"
+                                            : ""
+                                    }`}
                                 >
                                     {title}
                                 </Link>
@@ -133,7 +143,11 @@ const Navbar = () => {
                                     >
                                         <Link
                                             to={url}
-                                            className={`block py-2 transition-colors ${location.pathname === url ? 'text-emerald-600 font-medium' : 'text-gray-800 hover:text-emerald-600'}`}
+                                            className={`block py-2 transition-colors ${
+                                                location.pathname === url
+                                                    ? "text-emerald-600 font-medium"
+                                                    : "text-gray-800 hover:text-emerald-600"
+                                            }`}
                                             onClick={() => setIsMenuOpen(false)}
                                         >
                                             {title}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
     MapPin,
     ArrowLeft,
@@ -10,16 +10,28 @@ import {
     CloudSnow,
     ChevronLeft,
     ChevronRight,
+    Play,
 } from "lucide-react";
 import { properties } from "../lib/consts";
 
 const ListingDetailPage = () => {
     const { id } = useParams<{ id: string }>();
-    const navigate = useNavigate();
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
 
     // Find the property by ID
     const property = properties.find((p) => p.id === id);
+
+    // Combine images and videos into a single media array
+    const mediaItems = [
+        ...(property?.images.map((img) => ({
+            type: "image" as const,
+            src: img,
+        })) || []),
+        ...(property?.videos?.map((vid) => ({
+            type: "video" as const,
+            src: vid,
+        })) || []),
+    ];
 
     if (!property) {
         return (
@@ -44,91 +56,115 @@ const ListingDetailPage = () => {
         );
     }
 
-    const nextImage = () => {
-        setCurrentImageIndex((prevIndex) =>
-            prevIndex === property.images.length - 1 ? 0 : prevIndex + 1
+    const nextMedia = () => {
+        setCurrentMediaIndex((prevIndex) =>
+            prevIndex === mediaItems.length - 1 ? 0 : prevIndex + 1
         );
     };
 
-    const prevImage = () => {
-        setCurrentImageIndex((prevIndex) =>
-            prevIndex === 0 ? property.images.length - 1 : prevIndex - 1
+    const prevMedia = () => {
+        setCurrentMediaIndex((prevIndex) =>
+            prevIndex === 0 ? mediaItems.length - 1 : prevIndex - 1
         );
     };
 
     return (
-        <div className="pt-20 bg-gray-50 min-h-screen">
-            {/* Back Navigation */}
-            <div className="container mx-auto px-4 py-4">
-                <button
-                    onClick={() => navigate(-1)}
-                    className="flex items-center text-gray-600 hover:text-primary-600 transition-colors"
-                >
-                    <ArrowLeft size={18} className="mr-1" />
-                    Volver
-                </button>
-            </div>
-
-            {/* Property Images */}
+        <div className=" bg-gray-50 relative min-h-screen">
+            {/* Property Media Gallery */}
             <div className="relative bg-gray-900 overflow-hidden">
-                <div className="relative h-[60vh] overflow-hidden">
-                    {property.images.map((image, index) => (
+                <div className="relative h-[60vh] flex items-center justify-center">
+                    {mediaItems.map((media, index) => (
                         <div
                             key={index}
-                            className={`absolute inset-0 transition-opacity duration-500 ${
-                                index === currentImageIndex
+                            className={`absolute inset-0 transition-opacity duration-500 flex items-center justify-center ${
+                                index === currentMediaIndex
                                     ? "opacity-100"
                                     : "opacity-0"
                             }`}
                         >
-                            <img
-                                src={image}
-                                alt={`${property.title} - Imagen ${index + 1}`}
-                                className="w-full h-full object-cover"
-                            />
+                            {media.type === "image" ? (
+                                <img
+                                    src={media.src}
+                                    alt={`${property.title} - Imagen ${
+                                        index + 1
+                                    }`}
+                                    className="max-w-full max-h-full object-contain"
+                                />
+                            ) : (
+                                <video
+                                    controls
+                                    src={media.src}
+                                    poster={property.images[0]}
+                                    className="max-w-full max-h-full object-contain"
+                                >
+                                    Tu navegador no soporta videos.
+                                </video>
+                            )}
                         </div>
                     ))}
 
-                    {/* Image Navigation */}
-                    <div className="absolute inset-0 flex items-center justify-between px-4">
-                        <button
-                            onClick={prevImage}
-                            className="bg-black/30 hover:bg-black/50 text-white rounded-full p-2 transition-all transform hover:scale-110 backdrop-blur-sm"
-                        >
-                            <ChevronLeft size={24} />
-                        </button>
-                        <button
-                            onClick={nextImage}
-                            className="bg-black/30 hover:bg-black/50 text-white rounded-full p-2 transition-all transform hover:scale-110 backdrop-blur-sm"
-                        >
-                            <ChevronRight size={24} />
-                        </button>
-                    </div>
+                    {/* Media Navigation */}
+                    {mediaItems.length > 1 && (
+                        <div className="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
+                            <button
+                                onClick={prevMedia}
+                                className="bg-black/30 hover:bg-black/50 text-white rounded-full p-2 transition-all transform hover:scale-110 backdrop-blur-sm pointer-events-auto"
+                            >
+                                <ChevronLeft size={24} />
+                            </button>
+                            <button
+                                onClick={nextMedia}
+                                className="bg-black/30 hover:bg-black/50 text-white rounded-full p-2 transition-all transform hover:scale-110 backdrop-blur-sm pointer-events-auto"
+                            >
+                                <ChevronRight size={24} />
+                            </button>
+                        </div>
+                    )}
 
-                    {/* Image Counter */}
+                    {/* Media Counter */}
                     <div className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm backdrop-blur-sm">
-                        {currentImageIndex + 1} / {property.images.length}
+                        {currentMediaIndex + 1} / {mediaItems.length}
+                        {mediaItems[currentMediaIndex]?.type === "video" && (
+                            <span className="ml-2 text-xs">📹</span>
+                        )}
                     </div>
                 </div>
 
                 {/* Thumbnails */}
                 <div className="flex justify-center p-2 bg-gray-800">
-                    <div className="flex space-x-2 overflow-x-auto">
-                        {property.images.map((image, index) => (
+                    <div className="flex space-x-2 overflow-x-auto max-w-full">
+                        {mediaItems.map((media, index) => (
                             <button
                                 key={index}
-                                onClick={() => setCurrentImageIndex(index)}
-                                className={`h-16 w-24 flex-shrink-0 overflow-hidden rounded ${
-                                    index === currentImageIndex
+                                onClick={() => setCurrentMediaIndex(index)}
+                                className={`h-16 w-24 flex-shrink-0 overflow-hidden rounded relative ${
+                                    index === currentMediaIndex
                                         ? "ring-2 ring-emerald-500"
                                         : "opacity-70"
                                 }`}
                             >
-                                <img
-                                    src={image}
-                                    alt={`Thumbnail ${index + 1}`}
-                                    className="w-full h-full object-cover"
-                                />
+                                {media.type === "image" ? (
+                                    <img
+                                        src={media.src}
+                                        alt={`Thumbnail ${index + 1}`}
+                                        className="w-full h-full object-cover"
+                                    />
+                                ) : (
+                                    <div className="w-full h-full bg-gray-700 flex items-center justify-center">
+                                        <video
+                                            src={media.src}
+                                            className="w-full h-full object-cover"
+                                            muted
+                                            poster={property.images[0]}
+                                        />
+                                        <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                                            <Play
+                                                size={16}
+                                                className="text-white"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
                             </button>
                         ))}
                     </div>
@@ -300,15 +336,25 @@ const ListingDetailPage = () => {
                     <div className="lg:col-span-1">
                         <div className="bg-white rounded-xl shadow-md p-6 sticky top-24">
                             <div className="mb-6">
-                                <p className="text-sm text-gray-500 mb-1">
-                                    Precio
-                                </p>
-                                <p className="text-3xl font-bold text-primary-600">
-                                    $ {property.price}
-                                </p>
+                                {property.price && (
+                                    <div>
+                                        <p className="text-lg font-semibold text-gray-800 mb-2">
+                                            Precio
+                                        </p>
+                                        <p className="text-3xl font-bold text-primary-600">
+                                            {property.price}
+                                        </p>
+                                    </div>
+                                )}
                             </div>
 
-                            <div className="border-t border-gray-200 pt-6 mb-6">
+                            <div
+                                className={` ${
+                                    property.price
+                                        ? "border-t border-gray-200 pt-6"
+                                        : ""
+                                } mb-6`}
+                            >
                                 <h3 className="text-lg font-semibold text-gray-800 mb-3">
                                     Beneficios
                                 </h3>

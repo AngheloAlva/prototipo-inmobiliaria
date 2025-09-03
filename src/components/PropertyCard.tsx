@@ -68,17 +68,6 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
                             {property.area} m²
                         </p>
                     </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.5 }}
-                    >
-                        <p className="text-sm text-gray-500">Precio</p>
-                        <p className="font-semibold text-emerald-600">
-                            $ {property.price}
-                        </p>
-                    </motion.div>
                 </div>
                 <motion.div
                     whileHover={{ scale: 1.02 }}

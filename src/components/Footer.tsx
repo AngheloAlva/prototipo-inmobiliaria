@@ -17,7 +17,7 @@ const Footer = () => {
                         <div className="flex items-center space-x-2 mb-4">
                             <MapPin size={24} className="text-emerald-500" />
                             <h3 className="text-xl font-semibold">
-                                Canela Invert Asesorías
+                                Inmobiliaria Ulloa Accardi
                             </h3>
                         </div>
                         <p className="text-gray-400 mb-4">
@@ -119,8 +119,8 @@ const Footer = () => {
 
                 <div className="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500">
                     <p>
-                        &copy; {new Date().getFullYear()} Canela Invert
-                        Asesorías. Todos los derechos reservados.
+                        &copy; {new Date().getFullYear()} Inmobiliaria Ulloa
+                        Accardi. Todos los derechos reservados.
                     </p>
                 </div>
             </div>

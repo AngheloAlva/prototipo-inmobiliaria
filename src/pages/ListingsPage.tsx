@@ -32,15 +32,11 @@ const ListingsPage = () => {
                 .toLowerCase()
                 .includes(searchTerm.toLowerCase());
 
-        const matchesPrice =
-            parseInt(property.price.replace(/\./g, "")) >= priceRange[0] &&
-            parseInt(property.price.replace(/\./g, "")) <= priceRange[1];
-
         const matchesLocation =
             selectedLocations.length === 0 ||
             selectedLocations.includes(property.location.split(",")[0].trim());
 
-        return matchesSearch && matchesPrice && matchesLocation;
+        return matchesSearch && matchesLocation;
     });
 
     const handleLocationChange = (location: string) => {
@@ -57,8 +53,7 @@ const ListingsPage = () => {
             <div
                 className="h-64 relative bg-cover bg-center"
                 style={{
-                    backgroundImage:
-                        "url(https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)",
+                    backgroundImage: "url(/terreno-15.jpeg)",
                 }}
             >
                 <div className="absolute inset-0 bg-black/40"></div>

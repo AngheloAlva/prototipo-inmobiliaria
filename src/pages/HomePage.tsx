@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     ChevronRight,
     MapPin,
@@ -23,8 +23,7 @@ import MapComponent from "../components/MapComponent";
 import BentoCard from "../components/BentoCard";
 import BentoDialog from "../components/BentoDialog";
 import VideoDialog from "../components/VideoDialog";
-import { territoryImages, featureImages, exclusiveImages } from "../lib/images";
-import FeatureHighlight from "../components/FeatureHighlight";
+import { territoryImages, featureImages } from "../lib/images";
 import FeatureCard from "../components/FeatureCard";
 import { properties as allProperties } from "../lib/consts";
 
@@ -49,6 +48,7 @@ const HomePage = () => {
         null
     );
     const [isVideoOpen, setIsVideoOpen] = useState(false);
+    const [currentSlide, setCurrentSlide] = useState(0);
 
     const testimonials: TestimonialData[] = [
         {
@@ -84,19 +84,62 @@ const HomePage = () => {
         visible: { opacity: 1, y: 0 },
     };
 
+    const exclusiveFeatures = [
+        {
+            icon: <Mountain className="w-8 h-8 text-emerald-500" />,
+            title: "Rutas Interiores",
+            description:
+                "Rutas interiores diseñadas para explorar el territorio y conectar con la naturaleza. Senderos exclusivos que te permiten descubrir cada rincón de este paraíso natural, perfectos para caminatas, ciclismo y actividades al aire libre.",
+            image: "/terreno-5.jpeg",
+        },
+        {
+            icon: <Plane className="w-8 h-8 text-emerald-500" />,
+            title: "Helipuerto",
+            description:
+                "Helipuerto privado que ofrece un acceso rápido y exclusivo. Una comodidad única que te permite llegar a tu propiedad de manera eficiente y disfrutar de vistas panorámicas incomparables durante el trayecto.",
+            image: "https://images.pexels.com/photos/7263507/pexels-photo-7263507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        },
+        {
+            icon: <Car className="w-8 h-8 text-emerald-500" />,
+            title: "Seguridad Integral",
+            description:
+                "Sistema de seguridad integral con acceso controlado las 24 horas. Personal capacitado y tecnología de punta para garantizar tu tranquilidad y privacidad en todo momento, permitiéndote disfrutar de la naturaleza con total confianza.",
+            image: "/security.jpeg",
+        },
+        {
+            icon: <Trees className="w-8 h-8 text-emerald-500" />,
+            title: "Servicios Completos",
+            description:
+                "Infraestructura completa con todos los servicios básicos garantizados. Agua potable de la más alta calidad, electricidad confiable y sistemas de comunicación modernos que te permiten vivir en armonía con la naturaleza sin renunciar al confort.",
+            image: "/terreno-26.jpeg",
+        },
+    ];
+
+    // Auto-play functionality for carousel
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % exclusiveFeatures.length);
+        }, 5000); // Change slide every 5 seconds
+
+        return () => clearInterval(interval);
+    }, [exclusiveFeatures.length]);
+
+    const goToSlide = (index: number) => {
+        setCurrentSlide(index);
+    };
+
     return (
         <div className="flex flex-col">
             {/* Hero Section */}
             <section
                 className="relative min-h-screen flex items-center justify-center"
                 style={{
-                    backgroundImage:
-                        "url(https://images.pexels.com/photos/14546399/pexels-photo-14546399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)",
+                    backgroundImage: "url(/Hero.jpeg)",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                 }}
             >
-                <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute inset-0 bg-black/50" />
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -109,7 +152,7 @@ const HomePage = () => {
                         transition={{ delay: 0.3, duration: 0.8 }}
                         className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6 leading-tight"
                     >
-                        Altos de Mahuida <br />
+                        Inmobiliaria Ulloa Accardi <br />
                         <motion.span
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -480,7 +523,7 @@ const HomePage = () => {
                 />
             </section>
 
-            {/* Additional Features Section */}
+            {/* Additional Features Section - Carousel */}
             <section className="py-20 bg-white">
                 <div className="container mx-auto px-4">
                     <motion.div
@@ -492,62 +535,87 @@ const HomePage = () => {
                         <h2 className="text-3xl font-bold text-gray-800 mb-4">
                             Características Exclusivas
                         </h2>
-                        <p className="text-gray-600 max-w-2xl mx-auto">
+                        <p className="text-gray-600 max-w-2xl mx-auto mb-8">
                             Descubre las características que hacen de Altos de
                             Mahuida un lugar único y exclusivo.
                         </p>
                     </motion.div>
 
-                    <div className="flex flex-col gap-8 max-w-7xl mx-auto">
-                        {[
-                            {
-                                icon: (
-                                    <Mountain className="w-8 h-8 text-amber-500" />
-                                ),
-                                title: "Rutas Interiores",
-                                description:
-                                    "Rutas interiores diseñadas para explorar el territorio y conectar con la naturaleza. Senderos exclusivos que te permiten descubrir cada rincón de este paraíso natural, perfectos para caminatas, ciclismo y actividades al aire libre.",
-                                image: exclusiveImages.rutas,
-                                direction: "left" as const,
-                            },
-                            {
-                                icon: (
-                                    <Plane className="w-8 h-8 text-amber-500" />
-                                ),
-                                title: "Helipuerto",
-                                description:
-                                    "Helipuerto privado que ofrece un acceso rápido y exclusivo. Una comodidad única que te permite llegar a tu propiedad de manera eficiente y disfrutar de vistas panorámicas incomparables durante el trayecto.",
-                                image: exclusiveImages.helipuerto,
-                                direction: "right" as const,
-                            },
-                            {
-                                icon: (
-                                    <Car className="w-8 h-8 text-amber-500" />
-                                ),
-                                title: "Seguridad Integral",
-                                description:
-                                    "Sistema de seguridad integral con acceso controlado las 24 horas. Personal capacitado y tecnología de punta para garantizar tu tranquilidad y privacidad en todo momento, permitiéndote disfrutar de la naturaleza con total confianza.",
-                                image: exclusiveImages.seguridad,
-                                direction: "left" as const,
-                            },
-                            {
-                                icon: (
-                                    <Trees className="w-8 h-8 text-amber-500" />
-                                ),
-                                title: "Servicios Completos",
-                                description:
-                                    "Infraestructura completa con todos los servicios básicos garantizados. Agua potable de la más alta calidad, electricidad confiable y sistemas de comunicación modernos que te permiten vivir en armonía con la naturaleza sin renunciar al confort.",
-                                image: exclusiveImages.servicios,
-                                direction: "right" as const,
-                            },
-                        ].map((feature, index) => (
-                            <FeatureHighlight
+                    {/* Carousel Container */}
+                    <div className="relative max-w-6xl mx-auto">
+                        <div className="relative h-[600px] md:h-[500px]">
+                            {/* Current Slide */}
+                            <motion.div
+                                key={currentSlide}
+                                initial={{ opacity: 0, x: 100 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -100 }}
+                                transition={{
+                                    duration: 0.5,
+                                    ease: "easeInOut",
+                                }}
+                                className="absolute inset-0"
+                            >
+                                <div className="relative overflow-hidden rounded-xl bg-white shadow-card hover:shadow-elegant transition-shadow duration-300 h-full">
+                                    <div className="flex flex-col md:flex-row h-full">
+                                        <div className="relative w-full md:w-1/2 h-64 md:h-full">
+                                            <img
+                                                src={
+                                                    exclusiveFeatures[
+                                                        currentSlide
+                                                    ].image
+                                                }
+                                                alt={
+                                                    exclusiveFeatures[
+                                                        currentSlide
+                                                    ].title
+                                                }
+                                                className="w-full h-full object-cover"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                                        </div>
+                                        <div className="relative w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                                            <div className="p-3 bg-emerald-50 rounded-xl w-fit mb-6">
+                                                {
+                                                    exclusiveFeatures[
+                                                        currentSlide
+                                                    ].icon
+                                                }
+                                            </div>
+                                            <h3 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-6">
+                                                {
+                                                    exclusiveFeatures[
+                                                        currentSlide
+                                                    ].title
+                                                }
+                                            </h3>
+                                            <p className="text-gray-600 text-lg leading-relaxed">
+                                                {
+                                                    exclusiveFeatures[
+                                                        currentSlide
+                                                    ].description
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </div>
+                    </div>
+
+                    {/* Dot Indicators */}
+                    <div className="flex justify-center mt-8 gap-3">
+                        {exclusiveFeatures.map((_, index) => (
+                            <motion.button
                                 key={index}
-                                icon={feature.icon}
-                                title={feature.title}
-                                description={feature.description}
-                                image={feature.image}
-                                direction={feature.direction}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => goToSlide(index)}
+                                className={`w-4 h-4 rounded-full border-2 transition-all duration-200 ${
+                                    currentSlide === index
+                                        ? "bg-emerald-500 border-emerald-500"
+                                        : "bg-transparent border-gray-400 hover:border-emerald-400"
+                                }`}
+                                aria-label={`Ir a característica ${index + 1}`}
                             />
                         ))}
                     </div>
@@ -588,8 +656,7 @@ const HomePage = () => {
             <section
                 className="py-40 bg-cover bg-center relative"
                 style={{
-                    backgroundImage:
-                        "url(https://images.pexels.com/photos/1166209/pexels-photo-1166209.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)",
+                    backgroundImage: "url(/terreno-1.jpeg)",
                 }}
             >
                 <div className="absolute inset-0 bg-emerald-900/70"></div>
@@ -604,9 +671,9 @@ const HomePage = () => {
                         Sé el primero en tomar la mejor decisión
                     </h2>
                     <p className="text-emerald-100 mb-8 max-w-2xl mx-auto">
-                        Canela Invert Asesorías te invita a descubrir Altos de
-                        Mahuida, un proyecto único en las montañas de los Andes
-                        que ofrece un nuevo propósito de realidades en un
+                        Inmobiliaria Ulloa Accardi te invita a descubrir Altos
+                        de Mahuida, un proyecto único en las montañas de los
+                        Andes que ofrece un nuevo propósito de realidades en un
                         territorio protegido con biodiversidad excepcional.
                     </p>
                     <motion.div

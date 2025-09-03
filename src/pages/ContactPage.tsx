@@ -97,8 +97,7 @@ const ContactPage = () => {
             <div
                 className="h-64 relative bg-cover bg-center"
                 style={{
-                    backgroundImage:
-                        "url(https://images.pexels.com/photos/11928751/pexels-photo-11928751.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)",
+                    backgroundImage: "url(/terreno-16.jpeg)",
                 }}
             >
                 <div className="absolute inset-0 bg-black/50"></div>
@@ -137,7 +136,7 @@ const ContactPage = () => {
                                     <div>
                                         <p className="font-semibold">Email</p>
                                         <p className="text-white/90">
-                                            contacto@altosmahuida.cl
+                                            contacto@inmobiliariaulloaacardi.cl
                                         </p>
                                     </div>
                                 </div>

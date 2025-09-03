@@ -10,9 +10,8 @@ export const territoryImages = {
 };
 
 export const featureImages = {
-    tranquilidad:
-        "https://images.pexels.com/photos/32577413/pexels-photo-32577413.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    nieve: "https://images.pexels.com/photos/1903935/pexels-photo-1903935.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    tranquilidad: "/terreno-4.jpeg",
+    nieve: "/terreno-12.jpeg",
     turismo:
         "https://images.pexels.com/photos/13861602/pexels-photo-13861602.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     inversion:
