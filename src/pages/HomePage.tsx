@@ -13,7 +13,6 @@ import {
     Trees,
     Home,
     Coins,
-    Play,
     Map,
     X,
 } from "lucide-react";
@@ -24,7 +23,6 @@ import MapComponent from "../components/MapComponent";
 
 import BentoCard from "../components/BentoCard";
 import BentoDialog from "../components/BentoDialog";
-import VideoDialog from "../components/VideoDialog";
 import { territoryImages, featureImages } from "../lib/images";
 import FeatureCard from "../components/FeatureCard";
 import { properties as allProperties } from "../lib/consts";
@@ -49,7 +47,6 @@ const HomePage = () => {
     const [selectedItem, setSelectedItem] = useState<BentoCardProps | null>(
         null
     );
-    const [isVideoOpen, setIsVideoOpen] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isMapOpen, setIsMapOpen] = useState(false);
 
@@ -209,18 +206,6 @@ const HomePage = () => {
                                 </Link>
                             </motion.div>
                         </motion.div>
-
-                        <motion.button
-                            onClick={() => setIsVideoOpen(true)}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="flex items-center gap-2 text-white hover:text-emerald-500 transition-colors"
-                        >
-                            <div className="aspect-square relative bg-white/20 backdrop-blur-sm rounded-full size-14">
-                                <Play className="w-8 h-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ml-0.5" />
-                            </div>
-                            <span className="font-bold">Ver Video</span>
-                        </motion.button>
                     </div>
                 </motion.div>
 
@@ -313,12 +298,6 @@ const HomePage = () => {
                         ))}
                     </div>
                 </div>
-                <VideoDialog
-                    {/* Video de demostración genérico — reemplazar por el del proyecto */}
-                    videoId="aqz-KE-bpKQ"
-                    isOpen={isVideoOpen}
-                    onClose={() => setIsVideoOpen(false)}
-                />
 
                 {/* Map Dialog */}
                 {isMapOpen && (
