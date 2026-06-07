@@ -1,8 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN as string | undefined;
+
+// Mapbox GL only accepts public tokens (pk.*); a secret token (sk.*) makes it throw.
+const hasValidToken = !!MAPBOX_TOKEN && MAPBOX_TOKEN.startsWith("pk.");
 
 interface Location {
   name: string;
@@ -40,60 +43,69 @@ interface MapComponentProps {
 const MapComponent = ({ className = "" }: MapComponentProps) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
-    if (!MAPBOX_TOKEN || !mapContainer.current) return;
+    if (!hasValidToken || !mapContainer.current) return;
 
-    mapboxgl.accessToken = MAPBOX_TOKEN;
+    mapboxgl.accessToken = MAPBOX_TOKEN as string;
 
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/mapbox/outdoors-v12",
-      center: locations.villaSerna.coordinates,
-      zoom: 10,
-      pitch: 45,
-      bearing: -17.6,
-      antialias: true,
-    });
+    try {
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: "mapbox://styles/mapbox/outdoors-v12",
+        center: locations.villaSerna.coordinates,
+        zoom: 10,
+        pitch: 45,
+        bearing: -17.6,
+        antialias: true,
+      });
 
-    map.current.on("load", () => {
-      if (!map.current) return;
+      // A failure inside Mapbox must never blank the whole app.
+      map.current.on("error", () => setFailed(true));
 
-      // Add markers for each location
-      Object.values(locations).forEach((location) => {
-        const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
+      map.current.on("load", () => {
+        if (!map.current) return;
+
+        // Add markers for each location
+        Object.values(locations).forEach((location) => {
+          const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`
             <h3 class="font-bold">${location.name}</h3>
             <p>${location.description}</p>
           `);
 
-        new mapboxgl.Marker({
-          color: location.name === "Valle del Sol" ? "#059669" : "#ef4444",
-        })
-          .setLngLat(location.coordinates)
-          .setPopup(popup)
-          .addTo(map.current!);
+          new mapboxgl.Marker({
+            color: location.name === "Valle del Sol" ? "#059669" : "#ef4444",
+          })
+            .setLngLat(location.coordinates)
+            .setPopup(popup)
+            .addTo(map.current!);
+        });
+
+        // Add 3D terrain
+        map.current.addSource("mapbox-dem", {
+          type: "raster-dem",
+          url: "mapbox://mapbox.mapbox-terrain-dem-v1",
+          tileSize: 512,
+          maxzoom: 14,
+        });
+
+        map.current.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
       });
 
-      // Add 3D terrain
-      map.current.addSource("mapbox-dem", {
-        type: "raster-dem",
-        url: "mapbox://mapbox.mapbox-terrain-dem-v1",
-        tileSize: 512,
-        maxzoom: 14,
-      });
-
-      map.current.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
-    });
-
-    // Add navigation controls
-    map.current.addControl(new mapboxgl.NavigationControl());
+      // Add navigation controls
+      map.current.addControl(new mapboxgl.NavigationControl());
+    } catch (error) {
+      console.warn("Mapbox failed to initialize:", error);
+      setFailed(true);
+    }
 
     return () => {
       map.current?.remove();
     };
   }, []);
 
-  if (!MAPBOX_TOKEN) {
+  if (!hasValidToken || failed) {
     return (
       <div
         className={`relative flex items-center justify-center bg-gray-100 rounded-xl ${className}`}
