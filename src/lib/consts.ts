@@ -16,7 +16,7 @@ export const properties: Property[] = [
     {
         id: "1",
         title: "Parcela Vista Cordillera",
-        location: "Yungay, Ñuble",
+        location: "Villa Serena, Valle Central",
         price: null,
         area: "5.000",
         images: [
@@ -32,7 +32,7 @@ export const properties: Property[] = [
         ],
         videos: ["/terreno-29.mp4"],
         description:
-            "Espectacular parcela con vista privilegiada a la Cordillera de los Andes. Ubicada en el exclusivo proyecto Altos de Mahuida, esta propiedad ofrece una combinación única de naturaleza y confort. \n\nEl terreno cuenta con una suave pendiente que maximiza las vistas panorámicas, permitiéndote disfrutar de impresionantes amaneceres y atardeceres con la cordillera como telón de fondo. \n\nIdeal para construir tu casa soñada en un entorno natural privilegiado, con fácil acceso a la ciudad de Yungay y sus servicios.",
+            "Espectacular parcela con vista privilegiada a la Cordillera de los Andes. Ubicada en el exclusivo proyecto Valle del Sol, esta propiedad ofrece una combinación única de naturaleza y confort. \n\nEl terreno cuenta con una suave pendiente que maximiza las vistas panorámicas, permitiéndote disfrutar de impresionantes amaneceres y atardeceres con la cordillera como telón de fondo. \n\nIdeal para construir tu casa soñada en un entorno natural privilegiado, con fácil acceso a la ciudad de Villa Serena y sus servicios.",
         features: [
             "Vista panorámica a la Cordillera",
             "Terreno con pendiente suave",
@@ -46,7 +46,7 @@ export const properties: Property[] = [
             "Caminos interiores",
         ],
         amenities: [
-            "A 10 minutos de Yungay",
+            "A 10 minutos de Villa Serena",
             "Cerca de servicios básicos",
             "Acceso pavimentado",
         ],
@@ -54,8 +54,8 @@ export const properties: Property[] = [
     {
         id: "2",
         title: "Parcela Valle Central",
-        location: "Yungay, Ñuble",
-        price: "$ 38.500.000",
+        location: "Villa Serena, Valle Central",
+        price: "$ 95.000",
         area: "5.000",
         images: [
             "/terreno-10.jpeg",
@@ -70,7 +70,7 @@ export const properties: Property[] = [
         ],
         videos: ["/terreno-30.mp4"],
         description:
-            "Hermosa parcela ubicada en el corazón del proyecto Altos de Mahuida, con vistas panorámicas al valle central. Esta propiedad ofrece el equilibrio perfecto entre privacidad y conectividad. \n\nEl terreno presenta una topografía ideal para construcción, con áreas planas y una suave pendiente que permite aprovechar las vistas al valle. \n\nExcelente oportunidad para invertir en un proyecto exclusivo con alta plusvalía, en una zona de creciente desarrollo.",
+            "Hermosa parcela ubicada en el corazón del proyecto Valle del Sol, con vistas panorámicas al valle central. Esta propiedad ofrece el equilibrio perfecto entre privacidad y conectividad. \n\nEl terreno presenta una topografía ideal para construcción, con áreas planas y una suave pendiente que permite aprovechar las vistas al valle. \n\nExcelente oportunidad para invertir en un proyecto exclusivo con alta plusvalía, en una zona de creciente desarrollo.",
         features: [
             "Vista al valle",
             "Terreno plano",
@@ -92,8 +92,8 @@ export const properties: Property[] = [
     {
         id: "3",
         title: "Parcela Bosque Nativo",
-        location: "Yungay, Ñuble",
-        price: "UF 1250",
+        location: "Villa Serena, Valle Central",
+        price: "$ 120.000",
         area: "5.000",
         images: [
             "/terreno-19.jpeg",
@@ -107,7 +107,7 @@ export const properties: Property[] = [
             "/terreno-27.jpeg",
         ],
         description:
-            "Exclusiva parcela rodeada de bosque nativo en Altos de Mahuida, perfecta para los amantes de la naturaleza. Esta propiedad única combina la privacidad del entorno natural con las comodidades de un proyecto residencial de primer nivel. \n\nEl terreno conserva especies nativas que proporcionan un microclima especial y refugio para la fauna local. \n\nUna oportunidad única para vivir en armonía con la naturaleza, sin renunciar a la conectividad y servicios modernos.",
+            "Exclusiva parcela rodeada de bosque nativo en Valle del Sol, perfecta para los amantes de la naturaleza. Esta propiedad única combina la privacidad del entorno natural con las comodidades de un proyecto residencial de primer nivel. \n\nEl terreno conserva especies nativas que proporcionan un microclima especial y refugio para la fauna local. \n\nUna oportunidad única para vivir en armonía con la naturaleza, sin renunciar a la conectividad y servicios modernos.",
         features: [
             "Entorno de bosque nativo",
             "Fauna silvestre",

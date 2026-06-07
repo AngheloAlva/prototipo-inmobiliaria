@@ -17,12 +17,12 @@ const Footer = () => {
                         <div className="flex items-center space-x-2 mb-4">
                             <MapPin size={24} className="text-emerald-500" />
                             <h3 className="text-xl font-semibold">
-                                Inmobiliaria Ulloa Accardi
+                                Inmobiliaria Horizonte
                             </h3>
                         </div>
                         <p className="text-gray-400 mb-4">
-                            Parcelas de 5.000 m² en la hermosa región del Bío
-                            Bío, el lugar perfecto para descansar y disfrutar de
+                            Parcelas de 5.000 m² en la hermosa región del Valle
+                            Central, el lugar perfecto para descansar y disfrutar de
                             la naturaleza.
                         </p>
                         <div className="flex space-x-4">
@@ -81,7 +81,7 @@ const Footer = () => {
                                     className="text-emerald-500 mt-1 flex-shrink-0"
                                 />
                                 <span className="text-gray-400">
-                                    Región del Bío Bío, Chile
+                                    Región Valle Central
                                 </span>
                             </li>
                             <li className="flex items-start space-x-3">
@@ -90,7 +90,7 @@ const Footer = () => {
                                     className="text-emerald-500 mt-1 flex-shrink-0"
                                 />
                                 <span className="text-gray-400">
-                                    +56 9 1234 5678
+                                    +1 555 123 4567
                                 </span>
                             </li>
                             <li className="flex items-start space-x-3">
@@ -99,7 +99,7 @@ const Footer = () => {
                                     className="text-emerald-500 mt-1 flex-shrink-0"
                                 />
                                 <span className="text-gray-400">
-                                    info@canelainvertasesorias.cl
+                                    contacto@example.com
                                 </span>
                             </li>
                         </ul>
@@ -119,8 +119,7 @@ const Footer = () => {
 
                 <div className="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500">
                     <p>
-                        &copy; {new Date().getFullYear()} Inmobiliaria Ulloa
-                        Accardi. Todos los derechos reservados.
+                        &copy; {new Date().getFullYear()} Inmobiliaria Horizonte. Todos los derechos reservados.
                     </p>
                 </div>
             </div>

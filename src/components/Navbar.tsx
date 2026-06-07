@@ -56,7 +56,7 @@ const Navbar = () => {
                                         : "text-white"
                                 }`}
                             >
-                                Inmobiliaria Ulloa Accardi
+                                Inmobiliaria Horizonte
                             </span>
                         </Link>
                     </motion.div>

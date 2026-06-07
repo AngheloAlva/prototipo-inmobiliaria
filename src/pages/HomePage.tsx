@@ -58,16 +58,16 @@ const HomePage = () => {
             id: "1",
             name: "Rodrigo Martínez",
             role: "Inversor",
-            text: "Invertir en Altos de Mahuida fue una excelente decisión. El proyecto ofrece una conexión única con la naturaleza y una biodiversidad impresionante.",
-            location: "Santiago",
+            text: "Invertir en Valle del Sol fue una excelente decisión. El proyecto ofrece una conexión única con la naturaleza y una biodiversidad impresionante.",
+            location: "la capital",
             image: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         },
         {
             id: "2",
             name: "Carolina Pérez",
             role: "Propietaria",
-            text: "La ubicación es perfecta, a solo 70 millas de Concepción y rodeada de todos los servicios necesarios en Yungay. El entorno natural es simplemente espectacular.",
-            location: "Concepción",
+            text: "La ubicación es perfecta, a solo 70 millas de Puerto Esperanza y rodeada de todos los servicios necesarios en Villa Serena. El entorno natural es simplemente espectacular.",
+            location: "Puerto Esperanza",
             image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         },
     ];
@@ -155,7 +155,7 @@ const HomePage = () => {
                         transition={{ delay: 0.3, duration: 0.8 }}
                         className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-6 leading-tight"
                     >
-                        Inmobiliaria Ulloa Accardi <br />
+                        Inmobiliaria Horizonte <br />
                         <motion.span
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -314,7 +314,8 @@ const HomePage = () => {
                     </div>
                 </div>
                 <VideoDialog
-                    videoId="BVE_eSFg3-c"
+                    {/* Video de demostración genérico — reemplazar por el del proyecto */}
+                    videoId="aqz-KE-bpKQ"
                     isOpen={isVideoOpen}
                     onClose={() => setIsVideoOpen(false)}
                 />
@@ -349,7 +350,7 @@ const HomePage = () => {
                             <div className="">
                                 <img
                                     src="/places.jpeg"
-                                    alt="Mapa de terrenos disponibles en Altos de Mahuida"
+                                    alt="Mapa de terrenos disponibles en Valle del Sol"
                                     className="w-full h-auto rounded-lg"
                                 />
                             </div>
@@ -445,8 +446,8 @@ const HomePage = () => {
                                 transition={{ delay: 0.2, duration: 0.8 }}
                                 className="text-gray-600"
                             >
-                                Altos de Mahuida se encuentra en un territorio
-                                único, a solo 23 millas al oeste de Yungay, en
+                                Valle del Sol se encuentra en un territorio
+                                único, a solo 23 millas al oeste de Villa Serena, en
                                 la primera rama montañosa de Los Andes, rodeado
                                 de una biodiversidad excepcional.
                             </motion.p>
@@ -463,8 +464,8 @@ const HomePage = () => {
                                 >
                                     <Plane className="w-5 h-5 text-emerald-500" />
                                     <span>
-                                        Accesible desde Santiago vía aérea hasta
-                                        Concepción
+                                        Accesible desde la capital vía aérea hasta
+                                        Puerto Esperanza
                                     </span>
                                 </motion.li>
                                 <motion.li
@@ -473,7 +474,7 @@ const HomePage = () => {
                                 >
                                     <Car className="w-5 h-5 text-emerald-500" />
                                     <span>
-                                        A 70 millas de Concepción por tierra
+                                        A 70 millas de Puerto Esperanza por tierra
                                     </span>
                                 </motion.li>
                                 <motion.li
@@ -598,8 +599,8 @@ const HomePage = () => {
                             Características Exclusivas
                         </h2>
                         <p className="text-gray-600 max-w-2xl mx-auto mb-8">
-                            Descubre las características que hacen de Altos de
-                            Mahuida un lugar único y exclusivo.
+                            Descubre las características que hacen de Valle del
+                            Sol un lugar único y exclusivo.
                         </p>
                     </motion.div>
 
@@ -733,10 +734,10 @@ const HomePage = () => {
                         Sé el primero en tomar la mejor decisión
                     </h2>
                     <p className="text-emerald-100 mb-8 max-w-2xl mx-auto">
-                        Inmobiliaria Ulloa Accardi te invita a descubrir Altos
-                        de Mahuida, un proyecto único en las montañas de los
-                        Andes que ofrece un nuevo propósito de realidades en un
-                        territorio protegido con biodiversidad excepcional.
+                        Inmobiliaria Horizonte te invita a descubrir Valle del
+                        Sol, un proyecto único en las montañas de los Andes que
+                        ofrece un nuevo propósito de realidades en un territorio
+                        protegido con biodiversidad excepcional.
                     </p>
                     <motion.div
                         variants={containerVariants}

@@ -2,8 +2,7 @@ import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-mapboxgl.accessToken =
-    "pk.eyJ1IjoiYW56NyIsImEiOiJjbGtseHdub2swZnFyM2xqdGw4bWZoc244In0.FRktEd6x6xyxK99fyzRXNw";
+const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN as string | undefined;
 
 interface Location {
     name: string;
@@ -12,23 +11,23 @@ interface Location {
 }
 
 const locations: Record<string, Location> = {
-    yungay: {
-        name: "Yungay",
+    villaSerna: {
+        name: "Villa Serena",
         coordinates: [-72.0167, -37.1167] as [number, number],
         description: "Ciudad principal cercana al proyecto",
     },
-    altosDeMahuida: {
-        name: "Altos de Mahuida",
-        coordinates: [-71.9667, -37.0833] as [number, number], // Approximate coordinates, adjust as needed
+    valleDelSol: {
+        name: "Valle del Sol",
+        coordinates: [-71.9667, -37.0833] as [number, number],
         description: "Proyecto inmobiliario en territorio protegido",
     },
-    saltoDelLeon: {
-        name: "Salto del León",
-        coordinates: [-71.95, -37.0667] as [number, number], // Approximate coordinates, adjust as needed
+    cascadaDelBosque: {
+        name: "Cascada del Bosque",
+        coordinates: [-71.95, -37.0667] as [number, number],
         description: "Impresionante caída de agua",
     },
-    concepcion: {
-        name: "Concepción",
+    puertoEsperanza: {
+        name: "Puerto Esperanza",
         coordinates: [-73.05, -36.8267] as [number, number],
         description: "Ciudad principal de la región",
     },
@@ -43,12 +42,14 @@ const MapComponent = ({ className = "" }: MapComponentProps) => {
     const map = useRef<mapboxgl.Map | null>(null);
 
     useEffect(() => {
-        if (!mapContainer.current) return;
+        if (!MAPBOX_TOKEN || !mapContainer.current) return;
+
+        mapboxgl.accessToken = MAPBOX_TOKEN;
 
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
             style: "mapbox://styles/mapbox/outdoors-v12",
-            center: locations.yungay.coordinates,
+            center: locations.villaSerna.coordinates,
             zoom: 10,
             pitch: 45,
             bearing: -17.6,
@@ -67,7 +68,7 @@ const MapComponent = ({ className = "" }: MapComponentProps) => {
 
                 new mapboxgl.Marker({
                     color:
-                        location.name === "Altos de Mahuida"
+                        location.name === "Valle del Sol"
                             ? "#059669"
                             : "#ef4444",
                 })
@@ -94,6 +95,21 @@ const MapComponent = ({ className = "" }: MapComponentProps) => {
             map.current?.remove();
         };
     }, []);
+
+    if (!MAPBOX_TOKEN) {
+        return (
+            <div
+                className={`relative flex items-center justify-center bg-gray-100 rounded-xl ${className}`}
+            >
+                <p className="text-gray-500 text-sm text-center px-4">
+                    Mapa no disponible — configurá{" "}
+                    <code className="font-mono bg-gray-200 px-1 rounded">
+                        VITE_MAPBOX_TOKEN
+                    </code>
+                </p>
+            </div>
+        );
+    }
 
     return (
         <div className={`relative ${className}`}>

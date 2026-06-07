@@ -106,7 +106,7 @@ const ContactPage = () => {
                         Contáctanos
                     </h1>
                     <p className="text-xl text-white/90 max-w-2xl text-center">
-                        Descubre tu lugar en Altos de Mahuida, Yungay
+                        Descubre tu lugar en Valle del Sol, Villa Serena
                     </p>
                 </div>
             </div>
@@ -127,7 +127,7 @@ const ContactPage = () => {
                                             Teléfono
                                         </p>
                                         <p className="text-white/90">
-                                            +56 9 8765 4321
+                                            +1 555 123 4567
                                         </p>
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@ const ContactPage = () => {
                                     <div>
                                         <p className="font-semibold">Email</p>
                                         <p className="text-white/90">
-                                            contacto@inmobiliariaulloaacardi.cl
+                                            contacto@example.com
                                         </p>
                                     </div>
                                 </div>
@@ -147,7 +147,7 @@ const ContactPage = () => {
                                             Dirección
                                         </p>
                                         <p className="text-white/90">
-                                            Camino a Yungay, Sector Mahuida
+                                            Camino a Villa Serena, Sector Valle del Sol
                                         </p>
                                     </div>
                                 </div>
@@ -476,7 +476,7 @@ const ContactPage = () => {
                                                     ? "border-red-500"
                                                     : "border-gray-300"
                                             }`}
-                                            placeholder="¿En qué podemos ayudarte? ¿Te gustaría conocer más sobre nuestras parcelas en Altos de Mahuida?"
+                                            placeholder="¿En qué podemos ayudarte? ¿Te gustaría conocer más sobre nuestras parcelas en Valle del Sol?"
                                         ></textarea>
                                         {errors.message && (
                                             <p className="text-red-500 text-sm mt-1">

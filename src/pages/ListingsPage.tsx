@@ -3,7 +3,7 @@ import { Filter, Search } from "lucide-react";
 import PropertyCard from "../components/PropertyCard";
 import { properties as allProperties } from "../lib/consts";
 
-const defaultPriceRange: [number, number] = [35000000, 45000000];
+const defaultPriceRange: [number, number] = [50000, 150000];
 
 const ListingsPage = () => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -62,8 +62,8 @@ const ListingsPage = () => {
                         Terrenos Disponibles
                     </h1>
                     <p className="text-xl text-white/90 max-w-2xl text-center">
-                        Encuentra tu parcela ideal en la hermosa región del Bío
-                        Bío
+                        Encuentra tu parcela ideal en la hermosa región del Valle
+                        Central
                     </p>
                 </div>
             </div>
@@ -106,24 +106,18 @@ const ListingsPage = () => {
                                         <div className="flex justify-between text-sm text-gray-500">
                                             <span>
                                                 ${" "}
-                                                {(
-                                                    priceRange[0] / 1000000
-                                                ).toFixed(1)}
-                                                M
+                                                {priceRange[0].toLocaleString("es")}
                                             </span>
                                             <span>
                                                 ${" "}
-                                                {(
-                                                    priceRange[1] / 1000000
-                                                ).toFixed(1)}
-                                                M
+                                                {priceRange[1].toLocaleString("es")}
                                             </span>
                                         </div>
                                         <input
                                             type="range"
                                             min={defaultPriceRange[0]}
                                             max={defaultPriceRange[1]}
-                                            step="500000"
+                                            step="5000"
                                             value={priceRange[1]}
                                             onChange={(e) =>
                                                 setPriceRange([

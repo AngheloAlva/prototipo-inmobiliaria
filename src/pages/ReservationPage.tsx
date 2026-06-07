@@ -533,7 +533,7 @@ const ReservationPage = () => {
                                         <div className="bg-white border border-gray-200 rounded p-3 h-32 overflow-y-auto text-sm text-gray-600">
                                             <p className="font-medium text-center mb-2">
                                                 CARTA DE RESERVA - Inmobiliaria
-                                                Ulloa Accardi
+                                                Horizonte
                                             </p>
                                             <p>
                                                 Por medio de la presente,{" "}
@@ -542,8 +542,8 @@ const ReservationPage = () => {
                                                 {formData.rut}, manifiesta su
                                                 intención de reservar la parcela
                                                 "{property.title}", ubicada en
-                                                el proyecto Inmobiliaria Ulloa
-                                                Accardi, {property.location},
+                                                el proyecto Inmobiliaria
+                                                Horizonte, {property.location},
                                                 con una superficie de{" "}
                                                 {property.area} m², por un valor
                                                 de ${property.price} pesos
@@ -583,7 +583,7 @@ const ReservationPage = () => {
                                 ¡Reserva Completada!
                             </h1>
                             <p className="text-emerald-100">
-                                Tu reserva en Inmobiliaria Ulloa Accardi ha sido
+                                Tu reserva en Inmobiliaria Horizonte ha sido
                                 procesada correctamente
                             </p>
                         </div>
@@ -591,7 +591,7 @@ const ReservationPage = () => {
                             <p className="text-gray-600 mb-6">
                                 Hemos recibido tu solicitud de reserva para la
                                 parcela "{property.title}" en el proyecto
-                                Inmobiliaria Ulloa Accardi. En las próximas 24
+                                Inmobiliaria Horizonte. En las próximas 24
                                 horas, nuestro equipo de ventas se pondrá en
                                 contacto contigo para coordinar una visita al
                                 terreno y los siguientes pasos.
